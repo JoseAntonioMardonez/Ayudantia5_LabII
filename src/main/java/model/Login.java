@@ -15,7 +15,7 @@ public class Login {
     public ArrayList<Usuario> getUsuarios() {
         return usuarios;
     }
-    public void agregarAdministrador(Usuario usuario) {
+    public void agregarUsuario(Usuario usuario) {
         this.usuarios.add(usuario);
     }
 

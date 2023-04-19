@@ -7,19 +7,18 @@ import model.Usuario;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class VentanaLogin extends Ventana{
+public class VentanaRegistro extends Ventana{
     private JLabel textoMenu;
     private JLabel textoUsuario;
     private JLabel textoContrasena;
     private JTextField entradaTextoUsuario;
     private JPasswordField entradaTextoContrasena;
-    private JButton botonIngresar;
-    private JButton botonRegistrarse;
-    private JButton botonSalida;
+    private JButton botonRegistrar;
+    private JButton botonVolver;
     private Login login;
 
-    public VentanaLogin(Login login) {
-        super("Login",500,500);
+    public VentanaRegistro(Login login) {
+        super("Registro",500,500);
         this.login = login;
         generarElementosVentana();
     }
@@ -30,12 +29,11 @@ public class VentanaLogin extends Ventana{
         generarEntradaDeTextoNombre();
         generarTextoContrasena();
         generarEntradaDeTextoContrasena();
-        generarBotonIngresar();
-        generarBotonRegistrarse();
-        generarBotonSalir();
+        generarBotonRegistrar();
+        generarBotonVolver();
     }
     private void generarMensajeMenu() {
-        String textoBienvenida = "Login";
+        String textoBienvenida = "Registro";
         super.generarJLabelEncabezado(this.textoMenu, textoBienvenida, 150, 30, 500, 30);
     }
     private void generarTextoUsuario() {
@@ -61,26 +59,20 @@ public class VentanaLogin extends Ventana{
 
     }
 
-    private void generarBotonIngresar() {
-        String textoBoton = "Ingresar";
-        this.botonIngresar = super.generarBoton(textoBoton, 175, 240, 150, 40);
-        this.add(this.botonIngresar);
-        this.botonIngresar.addActionListener(this);
+    private void generarBotonRegistrar() {
+        String textoBoton = "Registrar";
+        this.botonRegistrar = super.generarBoton(textoBoton, 175, 240, 150, 40);
+        this.add(this.botonRegistrar);
+        this.botonRegistrar.addActionListener(this);
     }
-    private void generarBotonRegistrarse() {
-        String textoBoton = "Registrarse";
-        this.botonRegistrarse = super.generarBoton(textoBoton, 175, 290, 150, 40);
-        this.add(this.botonRegistrarse);
-        this.botonRegistrarse.addActionListener(this);
-    }
-    private void generarBotonSalir() {
-        String textoBoton = "Salir";
-        this.botonSalida = super.generarBoton(textoBoton, 175, 380, 150, 40);
-        this.add(this.botonSalida);
-        this.botonSalida.addActionListener(this);
+    private void generarBotonVolver() {
+        String textoBoton = "Volver";
+        this.botonVolver = super.generarBoton(textoBoton, 175, 380, 150, 40);
+        this.add(this.botonVolver);
+        this.botonVolver.addActionListener(this);
     }
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.botonIngresar) {
+        if (e.getSource() == this.botonRegistrar) {
             String nombreUsuario = entradaTextoUsuario.getText();
             char[] contrasena = entradaTextoContrasena.getPassword();
             boolean comprobarUsuario = login.comprobarUsuario(nombreUsuario,contrasena);
@@ -93,15 +85,10 @@ public class VentanaLogin extends Ventana{
             //Cierra la ventana actual
             this.dispose();
         }
-        if (e.getSource() == this.botonRegistrarse) {
-            new VentanaRegistro(login);
+        if(e.getSource() == this.botonVolver){
+            new VentanaLogin(login);
             //Cierra la ventana actual
             this.dispose();
-        }
-        if(e.getSource() == this.botonSalida){
-            GestorArchivos.registrarDatos(login.getUsuarios(),"C:\\Users\\josem\\IdeaProjects\\Ayudantia5_LabII\\src\\main\\java\\data\\Usuarios");
-            this.dispose();
-            System.exit(0);
         }
     }
 
